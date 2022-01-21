@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone/views/Home/home_page.dart';
 import 'package:netflix_clone/views/comeing%20soon/comeing_soon_screen.dart';
 import 'package:netflix_clone/views/downloads/downloads_screen.dart';
-import 'package:netflix_clone/views/more/more_screen.dart';
 import 'package:netflix_clone/views/search/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,21 +19,14 @@ class HomeScreen extends StatelessWidget {
         icon: Icon(Icons.video_call_outlined), label: "Comeing soon"),
     BottomNavigationBarItem(
         icon: Icon(
-          Icons.emoji_emotions_outlined,
-        ),
-        label: "Fast Laughs"),
-    BottomNavigationBarItem(
-        icon: Icon(
           Icons.download,
         ),
         label: "download"),
   ];
   var screens = [
     HomePage(),
-    // SearchScreen(),
     ComeingSoonScreen(),
     DownloadScreen(),
-    MoreScreen()
   ];
   ValueNotifier<int> index = ValueNotifier(0);
   @override
