@@ -21,13 +21,22 @@ class ComingSoonBuilder extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(ConstantString.imageUrl +
-                              upComing.data![index]["backdrop_path"])),
-                    )),
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(ConstantString.imageUrl +
+                          upComing.data![index]["backdrop_path"]),
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.play_circle_outline_outlined,
+                      color: Colors.white54,
+                      size: 50,
+                    ),
+                  ),
+                ),
                 Container(
                   height: 75,
                   child: Stack(
