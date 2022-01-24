@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:netflix_clone/controller/trending_controller.dart';
+import 'package:netflix_clone/model/model.dart';
 import 'package:netflix_clone/services/api_manager.dart';
 import 'package:netflix_clone/views/Home/all_show_home/all_shows.dart';
 import 'package:netflix_clone/views/Home/widgets/movies/movies_screen_home.dart';
@@ -22,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     Colors.black,
     Colors.black,
   ];
-  final apiManager = ApiManager();
+  final TrendingController _trendingController = Get.put(TrendingController());
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -40,7 +43,9 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: <Widget>[
               IconButton(
-                onPressed: () async {},
+                onPressed: () async {
+                  print(_trendingController.fetchData());
+                },
                 icon: Icon(Icons.search),
               ),
             ],

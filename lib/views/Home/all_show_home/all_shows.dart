@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:netflix_clone/controller/trending_controller.dart';
 import 'package:netflix_clone/services/api_manager.dart';
 import 'package:netflix_clone/views/Home/widgets/tv_shows/widget_tv_show/listview_tv_show.dart';
 import 'package:netflix_clone/views/Home/widgets/tv_shows/widget_tv_show/stack_listview.dart';
@@ -34,6 +36,7 @@ class _AllShowPageState extends State<AllShowPage> {
     super.initState();
   }
 
+  TrendingController get _trendingController => Get.find<TrendingController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,15 +61,6 @@ class _AllShowPageState extends State<AllShowPage> {
                       ),
                       child: Stack(
                         children: <Widget>[
-                          Positioned(
-                            left: 20,
-                            bottom: 85,
-                            child: Text(
-                                '${snapshot.data![2]["original_title"]} . ${snapshot.data![2]["media_type"]} . ${snapshot.data![2]["release_date"]}',
-                                style: TextStyle(
-                                    color: ReuseWidget.DARK_TEXT,
-                                    fontWeight: FontWeight.bold)),
-                          ),
                           Positioned(
                             height: 100,
                             width: MediaQuery.of(context).size.width,
@@ -205,6 +199,33 @@ class _AllShowPageState extends State<AllShowPage> {
                       ? ShowListView(snapshot: romanticMovies)
                       : Container();
                 }),
+            title("Old Movies"),
+            GetX<TrendingController>(builder: (manager) {
+              return Container(
+                  height: 170,
+                  child: Padding(
+                    padding: ReuseWidget.PADDING_ALL,
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          var url = ConstantString.imageUrl +
+                              manager.trendingMovies[index].backdropPath
+                                  .toString();
+
+                          return ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image(
+                                width: 100,
+                                image: NetworkImage(url),
+                                fit: BoxFit.cover,
+                              ));
+                        },
+                        separatorBuilder: (context, intdex) => SizedBox(
+                              width: 10,
+                            ),
+                        itemCount: manager.trendingMovies.length),
+                  ));
+            })
           ],
         ),
       ),
